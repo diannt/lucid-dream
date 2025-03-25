@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - Quantum Network Research Project</title>
+    <style>
+        :root {
+            --main-bg-color: #111122;
+            --header-bg-color: #222233;
+            --panel-bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --accent-color: #6666cc;
+            --link-color: #99aaff;
+            --node-color-physical: #3366cc;
+            --node-color-network: #cc6633;
+            --node-color-processing: #33cc66;
+            --node-color-analysis: #9966ff;
+            --node-color-visualization: #ff6699;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--header-bg-color);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: white;
+            border-bottom: 2px solid white;
+        }
+        
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            background-color: var(--panel-bg-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-color);
+        }
+        
+        h1 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+        
+        h2 {
+            margin-top: 2rem;
+            color: var(--accent-color);
+        }
+        
+        h3 {
+            color: var(--link-color);
+        }
+        
+        p {
+            line-height: 1.6;
+        }
+        
+        ul, ol {
+            line-height: 1.6;
+        }
+        
+        footer {
+            background-color: var(--header-bg-color);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .layer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .layer-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .physical-indicator {
+            background-color: var(--node-color-physical);
+        }
+        
+        .network-indicator {
+            background-color: var(--node-color-network);
+        }
+        
+        .processing-indicator {
+            background-color: var(--node-color-processing);
+        }
+        
+        .analysis-indicator {
+            background-color: var(--node-color-analysis);
+        }
+        
+        .visualization-indicator {
+            background-color: var(--node-color-visualization);
+        }
+        
+        .component-list {
+            margin-left: 30px;
+        }
+        
+        .architecture-diagram {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 2rem auto;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Quantum Network Research</div>
+            <div class="nav-links">
+                <a href="index.html">Overview</a>
+                <a href="architecture.html" class="active">Architecture</a>
+                <a href="implementation.html">Implementation</a>
+                <a href="https://github.com/diannt/lucid-dream" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-section">
+            <h1>System Architecture</h1>
+            <p>
+                The Quantum Network Research project is built on a five-layer architecture designed to systematically investigate quantum phenomena in networked systems. This architecture provides a comprehensive framework for exploring quantum teleportation, temporal effects, and information clustering across conventional internet infrastructure.
+            </p>
+            
+            <div class="architecture-diagram">
+                [Layered Architecture Diagram - Visualized in the interactive graph on the home page]
+            </div>
+            
+            <p>
+                Each layer of our system architecture is designed with specific responsibilities and interfaces with adjacent layers to create a complete quantum networking stack. Below, we detail each layer and its components.
+            </p>
+            
+            <h2 class="layer-header">
+                <div class="layer-indicator physical-indicator"></div>
+                Physical Infrastructure Layer
+            </h2>
+            <p>
+                This foundational layer provides the physical medium and hardware components necessary for quantum networking. Building on recent breakthroughs in quantum teleportation over conventional internet infrastructure, our physical layer integrates both quantum and classical communication channels.
+            </p>
+            
+            <h3>Components</h3>
+            <div class="component-list">
+                <h4>Fiber Optic Network</h4>
+                <p>
+                    The fiber optic infrastructure serves as the physical medium for both quantum and classical data transmission. Our design calls for a minimum 30km fiber loop with wavelength division multiplexing that allows quantum and classical signals to coexist.
+                </p>
+                <ul>
+                    <li>Optical splitters for traffic mirroring and analysis</li>
+                    <li>Wavelength filters for quantum channel isolation (1550nm band)</li>
+                    <li>Temperature-stabilized fiber housing (±0.5°C)</li>
+                </ul>
+                
+                <h4>Biometric Devices</h4>
+                <p>
+                    A network of sensors to collect physiological data from human participants, allowing us to investigate potential correlations between quantum information patterns and human biological systems.
+                </p>
+                <ul>
+                    <li>Heart rate variability (HRV) monitors</li>
+                    <li>Electroencephalogram (EEG) headsets</li>
+                    <li>Galvanic skin response sensors</li>
+                </ul>
+                
+                <h4>Computing Hardware</h4>
+                <p>
+                    High-performance computing systems that provide the processing capabilities required for quantum simulations, data analysis, and real-time monitoring.
+                </p>
+                <ul>
+                    <li>32+ core high-performance computing cluster</li>
+                    <li>FPGA-based quantum random number generators</li>
+                    <li>Network traffic analyzers with nanosecond timestamp precision</li>
+                </ul>
+            </div>
+            
+            <h2 class="layer-header">
+                <div class="layer-indicator network-indicator"></div>
+                Quantum-Classical Network Layer
+            </h2>
+            <p>
+                This layer manages the transmission of both quantum and classical information across the physical infrastructure. It handles entanglement distribution, quantum state transmission, and the classical communication necessary for quantum teleportation protocols.
+            </p>
+            
+            <h3>Components</h3>
+            <div class="component-list">
+                <h4>Quantum Channel</h4>
+                <p>
+                    Manages the transmission of quantum information, primarily through entangled photons, implementing quantum key distribution and entanglement distribution protocols.
+                </p>
+                <ul>
+                    <li>BB84 and E91 quantum key distribution protocols</li>
+                    <li>Entanglement distribution management</li>
+                    <li>Bell state measurement capabilities</li>
+                </ul>
+                
+                <h4>Classical Channel</h4>
+                <p>
+                    Handles conventional network traffic while supporting quantum operations through specialized protocols and timing systems.
+                </p>
+                <ul>
+                    <li>TCP/IP stack with quantum protocol extensions</li>
+                    <li>Precision timing protocol implementation</li>
+                    <li>Metadata exchange for quantum teleportation coordination</li>
+                </ul>
+                
+                <h4>Network Monitor</h4>
+                <p>
+                    Tracks all network activity and correlates quantum and classical events across the infrastructure.
+                </p>
+                <ul>
+                    <li>Deep packet inspection for classical traffic</li>
+                    <li>Quantum channel noise analysis</li>
+                    <li>Timing correlation between quantum and classical events</li>
+                </ul>
+            </div>
+            
+            <h2 class="layer-header">
+                <div class="layer-indicator processing-indicator"></div>
+                Quantum Information Processing Layer
+            </h2>
+            <p>
+                This layer implements the core quantum protocols and processing mechanisms that enable our key research areas: quantum teleportation, temporal effects, and information clustering.
+            </p>
+            
+            <h3>Components</h3>
+            <div class="component-list">
+                <h4>Teleportation Module</h4>
+                <p>
+                    Implements quantum teleportation protocols between network nodes, enabling the transfer of quantum states across the network without physical transmission of quantum particles.
+                </p>
+                <ul>
+                    <li>Bell state preparation and measurement</li>
+                    <li>Classical channel coordination</li>
+                    <li>Teleportation fidelity verification</li>
+                </ul>
+                
+                <h4>Temporal Effects Module</h4>
+                <p>
+                    Analyzes and simulates temporal anomalies in quantum information flow, investigating phenomena where measurement outcomes can appear to influence initial conditions.
+                </p>
+                <ul>
+                    <li>Delayed-choice experiment implementations</li>
+                    <li>Retrocausal correlation detection</li>
+                    <li>Wheeler-DeWitt equation simulation</li>
+                </ul>
+                
+                <h4>Quantum Clustering Module</h4>
+                <p>
+                    Detects emergent information structures across the quantum network, identifying patterns that arise from quantum correlations between multiple nodes.
+                </p>
+                <ul>
+                    <li>Quantum mutual information calculation</li>
+                    <li>Clustering algorithms for information density</li>
+                    <li>Field theory simulations for quantum dynamics</li>
+                </ul>
+            </div>
+            
+            <h2 class="layer-header">
+                <div class="layer-indicator analysis-indicator"></div>
+                Analysis and Correlation Layer
+            </h2>
+            <p>
+                This layer provides tools and methodologies for analyzing quantum phenomena and correlating them with other systems, including human biometrics. It focuses on extracting meaningful patterns and insights from complex quantum data.
+            </p>
+            
+            <h3>Components</h3>
+            <div class="component-list">
+                <h4>Entanglement Analysis</h4>
+                <p>
+                    Measures and characterizes quantum entanglement properties across the system, providing metrics and visualizations of quantum correlations.
+                </p>
+                <ul>
+                    <li>Entanglement entropy calculation</li>
+                    <li>Bell inequality violation detection</li>
+                    <li>Entanglement distillation metrics</li>
+                </ul>
+                
+                <h4>Biometric Correlation</h4>
+                <p>
+                    Correlates human physiological states with quantum information patterns, investigating potential relationships between quantum systems and biological processes.
+                </p>
+                <ul>
+                    <li>Time-series correlation analysis</li>
+                    <li>Group synchronization detection</li>
+                    <li>Anomaly detection in human-quantum interactions</li>
+                </ul>
+                
+                <h4>Pattern Detection</h4>
+                <p>
+                    Identifies significant patterns in quantum-classical interactions across the system, using advanced algorithms to recognize emergent structures.
+                </p>
+                <ul>
+                    <li>Wavelet analysis for time-frequency correlations</li>
+                    <li>Information flow directionality assessment</li>
+                    <li>Emergent pattern classification</li>
+                </ul>
+            </div>
+            
+            <h2 class="layer-header">
+                <div class="layer-indicator visualization-indicator"></div>
+                Visualization and Interface Layer
+            </h2>
+            <p>
+                This layer provides intuitive representations of quantum states, correlations, and system operations. It makes complex quantum phenomena accessible for research and analysis through interactive visualizations.
+            </p>
+            
+            <h3>Components</h3>
+            <div class="component-list">
+                <h4>Quantum State Visualizer</h4>
+                <p>
+                    Provides intuitive representations of quantum states and operations, helping researchers understand and manipulate quantum information.
+                </p>
+                <ul>
+                    <li>Bloch sphere visualization for qubits</li>
+                    <li>Quantum circuit diagram generation</li>
+                    <li>Entanglement network mapping</li>
+                </ul>
+                
+                <h4>Correlation Dashboard</h4>
+                <p>
+                    Displays relationships between quantum information and other systems, particularly human biometrics, through interactive visualizations.
+                </p>
+                <ul>
+                    <li>Correlation matrix heatmaps</li>
+                    <li>Time-series alignment views</li>
+                    <li>Statistical significance indicators</li>
+                </ul>
+                
+                <h4>Real-time Monitor</h4>
+                <p>
+                    Provides live monitoring of ongoing quantum network operations and experiments, allowing researchers to track system performance and experiment progress.
+                </p>
+                <ul>
+                    <li>System health and performance metrics</li>
+                    <li>Event logging and alerting</li>
+                    <li>Experiment progress tracking</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Quantum Network Research Project | Open Source | 2025</p>
+    </footer>
+</body>
+</html>
