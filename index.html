@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Network Research Project</title>
-    
-    <!-- Load libraries with specific versions that are known to work together -->
-    <script src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
-    <script src="https://unpkg.com/vis-data@7.1.4/dist/vis-data.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.css">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-data/7.1.2/vis-data.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.css">
     <style>
         :root {
             --main-bg-color: #111122;
@@ -18,6 +15,11 @@
             --text-color: #ffffff;
             --accent-color: #6666cc;
             --link-color: #99aaff;
+            --node-color-physical: #3366cc;
+            --node-color-network: #cc6633;
+            --node-color-processing: #33cc66;
+            --node-color-analysis: #9966ff;
+            --node-color-visualization: #ff6699;
         }
         
         body {
@@ -26,80 +28,209 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
         }
         
         header {
             background-color: var(--header-bg-color);
             padding: 1rem;
-            text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: white;
+            border-bottom: 2px solid white;
         }
         
         main {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1rem;
             padding: 1rem;
+            height: calc(100vh - 126px);
         }
         
-        #visualization-container {
-            flex: 1;
+        .visualization-container {
             background-color: var(--panel-bg-color);
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1rem;
-            min-height: 70vh;
         }
         
-        #info-panel {
+        #quantum-network {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .info-panel {
             background-color: var(--panel-bg-color);
             padding: 1rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .info-panel h2 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .info-panel h3 {
+            margin-bottom: 0.5rem;
+            color: var(--link-color);
+        }
+        
+        .info-panel p {
+            line-height: 1.6;
         }
         
         footer {
             background-color: var(--header-bg-color);
             padding: 1rem;
             text-align: center;
+            font-size: 0.9rem;
         }
         
-        /* For debugging */
-        .debug-info {
+        /* Node details section */
+        #node-details {
+            display: none;
+        }
+        
+        .key-term {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .github-link {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .github-link:hover {
+            background-color: #8888dd;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+        
+        /* Debug panel for troubleshooting */
+        .debug-panel {
+            display: none;
             background-color: #332211;
             padding: 0.5rem;
             margin-top: 1rem;
             border-radius: 4px;
             font-family: monospace;
-            display: none;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Quantum Network Research Project</h1>
+        <nav>
+            <div class="logo">Quantum Network Research</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Overview</a>
+                <a href="architecture.html">Architecture</a>
+                <a href="implementation.html">Implementation</a>
+                <a href="https://github.com/diannt/lucid-dream" target="_blank">GitHub</a>
+            </div>
+        </nav>
     </header>
     
     <main>
-        <div id="visualization-container"></div>
+        <div class="visualization-container">
+            <div id="quantum-network"></div>
+        </div>
         
-        <div id="info-panel">
-            <h2>Project Overview</h2>
-            <p>This open-source research project investigates quantum phenomena in networked systems, building on recent breakthroughs in quantum teleportation over conventional internet infrastructure.</p>
+        <div class="info-panel">
+            <div id="project-overview">
+                <h2>Project Overview</h2>
+                <p>This open-source research project investigates quantum phenomena in networked systems, building on recent breakthroughs in quantum teleportation over conventional internet infrastructure.</p>
+                
+                <p>Our project focuses on three key quantum phenomena:</p>
+                <ul>
+                    <li><span class="key-term">Quantum Teleportation</span>: State transfer between spatially separated systems</li>
+                    <li><span class="key-term">Temporal Information Effects</span>: Correlation patterns that exhibit temporal anomalies</li>
+                    <li><span class="key-term">Information Clustering</span>: Emergence of coherent information structures across network nodes</li>
+                </ul>
+                
+                <p>The interactive visualization on the left represents our system architecture. Click on any node to learn more about that component.</p>
+                
+                <h3>Recent Research Breakthroughs</h3>
+                <p>
+                    In December 2024, Northwestern University engineers successfully demonstrated quantum teleportation over conventional fiber optic cables carrying regular internet traffic. This groundbreaking achievement showed that quantum and classical communications can coexist on the same physical infrastructure.
+                </p>
+                <p>
+                    Our research expands on this breakthrough by investigating not only quantum teleportation but also temporal effects and information clustering phenomena that emerge in such systems.
+                </p>
+                
+                <h3>Project Goals</h3>
+                <ul>
+                    <li>Develop a comprehensive software architecture for quantum network research</li>
+                    <li>Implement practical quantum teleportation protocols over conventional networks</li>
+                    <li>Investigate temporal anomalies in quantum information transfer</li>
+                    <li>Explore clustering patterns across quantum-connected network nodes</li>
+                    <li>Create visualization tools that make quantum phenomena accessible</li>
+                </ul>
+                
+                <a href="https://github.com/diannt/lucid-dream" class="github-link" target="_blank">Contribute on GitHub</a>
+                
+                <div class="debug-panel" id="debug-output">
+                    Debug information will appear here if enabled.
+                </div>
+            </div>
             
-            <p>Our project focuses on three key quantum phenomena:</p>
-            <ul>
-                <li><strong>Quantum Teleportation</strong>: State transfer between spatially separated systems</li>
-                <li><strong>Temporal Information Effects</strong>: Correlation patterns that exhibit temporal anomalies</li>
-                <li><strong>Information Clustering</strong>: Emergence of coherent information structures across network nodes</li>
-            </ul>
-            
-            <div class="debug-info" id="debug-panel">
-                <h3>Debug Information</h3>
-                <div id="debug-output">Waiting for visualization to initialize...</div>
+            <div id="node-details">
+                <h2 id="node-title">Component Details</h2>
+                <p id="node-description">Select a component in the visualization to see details.</p>
+                
+                <h3>Technical Specifications</h3>
+                <div id="node-specs"></div>
+                
+                <h3>Connections</h3>
+                <div id="node-connections"></div>
             </div>
         </div>
     </main>
@@ -109,151 +240,424 @@
     </footer>
     
     <script>
-        // Enable debug mode - set to true to see debug info
-        const debugMode = true;
+        // Enable or disable debug mode
+        const debugMode = false;
         
         // Show debug panel if in debug mode
         if (debugMode) {
-            document.getElementById('debug-panel').style.display = 'block';
+            document.querySelector('.debug-panel').style.display = 'block';
         }
         
-        // Log to both console and debug panel
+        // Debug log function
         function debugLog(message) {
-            console.log(message);
             if (debugMode) {
+                console.log(message);
                 const debugOutput = document.getElementById('debug-output');
-                debugOutput.innerHTML += '<div>' + message + '</div>';
+                debugOutput.innerHTML += `<div>${message}</div>`;
             }
         }
         
-        // Initialize the visualization when the page is fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            debugLog('DOM fully loaded');
-            initializeVisualization();
-        });
+        // Log initial debug information
+        debugLog('Page loaded. Initializing visualization...');
         
-        // Main visualization initialization
-        function initializeVisualization() {
-            try {
-                debugLog('Starting visualization initialization');
-                
-                // Check if required libraries are loaded
-                if (typeof vis === 'undefined') {
-                    throw new Error('vis.js library not loaded');
-                }
-                
-                // Select the container
-                const container = document.getElementById('visualization-container');
-                if (!container) {
-                    throw new Error('Container element not found');
-                }
-                
-                debugLog('Creating nodes dataset');
-                
-                // Create a basic nodes dataset
-                const nodes = new vis.DataSet([
-                    { id: 'physical', label: 'Physical\nInfrastructure', group: 'layer1' },
-                    { id: 'network', label: 'Network\nLayer', group: 'layer2' },
-                    { id: 'processing', label: 'Quantum\nProcessing', group: 'layer3' },
-                    { id: 'analysis', label: 'Analysis\nLayer', group: 'layer4' },
-                    { id: 'visualization', label: 'Visualization\nLayer', group: 'layer5' },
-                    
-                    { id: 'teleport', label: 'Teleportation', group: 'phenomena1' },
-                    { id: 'temporal', label: 'Temporal\nEffects', group: 'phenomena2' },
-                    { id: 'clustering', label: 'Information\nClustering', group: 'phenomena3' }
-                ]);
-                
-                debugLog('Creating edges dataset');
-                
-                // Create edges to connect the nodes
-                const edges = new vis.DataSet([
-                    // Layer connections
-                    { from: 'physical', to: 'network' },
-                    { from: 'network', to: 'processing' },
-                    { from: 'processing', to: 'analysis' },
-                    { from: 'analysis', to: 'visualization' },
-                    
-                    // Phenomena connections
-                    { from: 'processing', to: 'teleport', dashes: true },
-                    { from: 'processing', to: 'temporal', dashes: true },
-                    { from: 'processing', to: 'clustering', dashes: true },
-                    
-                    // Feedback loop
-                    { from: 'visualization', to: 'physical', arrows: 'to', smooth: { type: 'curvedCW', roundness: 0.8 }, dashes: true }
-                ]);
-                
-                debugLog('Setting up visualization options');
-                
-                // Configuration for the network graph
-                const options = {
-                    nodes: {
-                        shape: 'box',
-                        margin: 10,
-                        font: {
-                            size: 16,
-                            color: 'white'
-                        }
+        // Data for the network visualization
+        const nodes = new vis.DataSet([
+            // Physical Layer
+            { id: 'fiber', label: 'Fiber Optic\nNetwork', group: 'physical', level: 1, title: 'Physical fiber optic infrastructure' },
+            { id: 'biometric', label: 'Biometric\nDevices', group: 'physical', level: 1, title: 'Physiological measurement devices' },
+            { id: 'hardware', label: 'Computing\nHardware', group: 'physical', level: 1, title: 'Processing hardware' },
+            
+            // Network Layer
+            { id: 'quantum-channel', label: 'Quantum\nChannel', group: 'network', level: 2, title: 'Quantum communication channel' },
+            { id: 'classical-channel', label: 'Classical\nChannel', group: 'network', level: 2, title: 'Classical communication channel' },
+            { id: 'network-monitor', label: 'Network\nMonitor', group: 'network', level: 2, title: 'Traffic monitoring system' },
+            
+            // Processing Layer
+            { id: 'teleportation', label: 'Teleportation\nModule', group: 'processing', level: 3, title: 'Quantum teleportation implementation' },
+            { id: 'temporal', label: 'Temporal\nEffects', group: 'processing', level: 3, title: 'Temporal anomaly detection' },
+            { id: 'clustering', label: 'Quantum\nClustering', group: 'processing', level: 3, title: 'Information clustering analysis' },
+            
+            // Analysis Layer
+            { id: 'entanglement', label: 'Entanglement\nAnalysis', group: 'analysis', level: 4, title: 'Entanglement measurement tools' },
+            { id: 'bio-correlation', label: 'Biometric\nCorrelation', group: 'analysis', level: 4, title: 'Human-quantum correlation analysis' },
+            { id: 'pattern', label: 'Pattern\nDetection', group: 'analysis', level: 4, title: 'Quantum pattern recognition' },
+            
+            // Visualization Layer
+            { id: 'state-viz', label: 'Quantum State\nVisualizer', group: 'visualization', level: 5, title: 'Quantum state visualization tools' },
+            { id: 'correlation-dash', label: 'Correlation\nDashboard', group: 'visualization', level: 5, title: 'Data correlation dashboard' },
+            { id: 'monitor', label: 'Real-time\nMonitor', group: 'visualization', level: 5, title: 'System monitoring interface' }
+        ]);
+
+        // Define the connections between nodes
+        const edges = new vis.DataSet([
+            // Physical to Network connections
+            { from: 'fiber', to: 'quantum-channel' },
+            { from: 'fiber', to: 'classical-channel' },
+            { from: 'biometric', to: 'classical-channel' },
+            { from: 'hardware', to: 'network-monitor' },
+            
+            // Network to Processing connections
+            { from: 'quantum-channel', to: 'teleportation' },
+            { from: 'classical-channel', to: 'temporal' },
+            { from: 'network-monitor', to: 'clustering' },
+            
+            // Cross-connections in Processing
+            { from: 'teleportation', to: 'temporal', dashes: true },
+            { from: 'temporal', to: 'clustering', dashes: true },
+            
+            // Processing to Analysis connections
+            { from: 'teleportation', to: 'entanglement' },
+            { from: 'temporal', to: 'bio-correlation' },
+            { from: 'clustering', to: 'pattern' },
+            
+            // Analysis to Visualization connections
+            { from: 'entanglement', to: 'state-viz' },
+            { from: 'bio-correlation', to: 'correlation-dash' },
+            { from: 'pattern', to: 'monitor' },
+            
+            // Feedback loops
+            { from: 'state-viz', to: 'teleportation', arrows: 'to', dashes: true, smooth: { type: 'curvedCW', roundness: 0.8 } },
+            { from: 'monitor', to: 'clustering', arrows: 'to', dashes: true, smooth: { type: 'curvedCCW', roundness: 0.8 } }
+        ]);
+
+        // Node component details
+        const nodeDetails = {
+            'fiber': {
+                title: 'Fiber Optic Network',
+                description: 'The physical layer that provides the medium for both quantum and classical communication.',
+                specs: `
+                    <ul>
+                        <li>30km fiber optic cable loop with wavelength division multiplexing</li>
+                        <li>Optical splitters for traffic mirroring and analysis</li>
+                        <li>Wavelength filters for quantum channel isolation (1550nm band)</li>
+                    </ul>
+                `,
+                connections: 'Connects to the Quantum Channel and Classical Channel, providing the physical medium for data transmission.'
+            },
+            'biometric': {
+                title: 'Biometric Devices',
+                description: 'Collects physiological data from participants to correlate with quantum information patterns.',
+                specs: `
+                    <ul>
+                        <li>Heart rate variability (HRV) monitors</li>
+                        <li>Electroencephalogram (EEG) headsets</li>
+                        <li>Galvanic skin response sensors</li>
+                    </ul>
+                `,
+                connections: 'Data flows to the Classical Channel and eventually to the Biometric Correlation module for analysis.'
+            },
+            'hardware': {
+                title: 'Computing Hardware',
+                description: 'Provides the processing capabilities for quantum simulations and data analysis.',
+                specs: `
+                    <ul>
+                        <li>High-performance computing cluster (32+ cores)</li>
+                        <li>FPGA-based quantum random number generators</li>
+                        <li>Network traffic analyzers with nanosecond timestamps</li>
+                    </ul>
+                `,
+                connections: 'Powers the Network Monitor component and provides computation resources for the entire system.'
+            },
+            'quantum-channel': {
+                title: 'Quantum Channel',
+                description: 'Manages the transmission of quantum information, primarily through entangled photons.',
+                specs: `
+                    <ul>
+                        <li>QKD protocol implementation (BB84, E91)</li>
+                        <li>Entanglement distribution management</li>
+                        <li>Bell state measurement capabilities</li>
+                    </ul>
+                `,
+                connections: 'Receives input from the Fiber Optic Network and transmits quantum states to the Teleportation Module.'
+            },
+            'classical-channel': {
+                title: 'Classical Channel',
+                description: 'Handles conventional network traffic while supporting quantum operations.',
+                specs: `
+                    <ul>
+                        <li>TCP/IP stack with quantum protocol extensions</li>
+                        <li>Synchronized timing distribution</li>
+                        <li>Metadata exchange for quantum teleportation coordination</li>
+                    </ul>
+                `,
+                connections: 'Receives data from both Fiber Network and Biometric Devices, transmitting to the Temporal Effects module.'
+            },
+            'network-monitor': {
+                title: 'Network Monitor',
+                description: 'Tracks all network activity and correlates quantum and classical events.',
+                specs: `
+                    <ul>
+                        <li>Deep packet inspection for classical traffic</li>
+                        <li>Quantum channel noise analysis</li>
+                        <li>Timing correlation between events</li>
+                    </ul>
+                `,
+                connections: 'Monitors all network activity and feeds data to the Quantum Clustering module for pattern analysis.'
+            },
+            'teleportation': {
+                title: 'Teleportation Module',
+                description: 'Implements quantum teleportation protocols between network nodes.',
+                specs: `
+                    <ul>
+                        <li>Bell state preparation and measurement</li>
+                        <li>Classical channel coordination</li>
+                        <li>Teleportation fidelity verification</li>
+                    </ul>
+                `,
+                connections: 'Receives quantum states from the Quantum Channel, connects to Temporal Effects, and sends data to Entanglement Analysis.'
+            },
+            'temporal': {
+                title: 'Temporal Effects Module',
+                description: 'Analyzes and simulates temporal anomalies in quantum information flow.',
+                specs: `
+                    <ul>
+                        <li>Delayed-choice experiment implementations</li>
+                        <li>Retrocausal correlation detection</li>
+                        <li>Wheeler-DeWitt equation simulation</li>
+                    </ul>
+                `,
+                connections: 'Interfaces with both Teleportation and Clustering modules, and sends data to Biometric Correlation analysis.'
+            },
+            'clustering': {
+                title: 'Quantum Clustering Module',
+                description: 'Detects emergent information structures across the quantum network.',
+                specs: `
+                    <ul>
+                        <li>Quantum mutual information calculation</li>
+                        <li>Clustering algorithm for information density</li>
+                        <li>Field theory simulation for quantum dynamics</li>
+                    </ul>
+                `,
+                connections: 'Processes data from Network Monitor and Temporal Effects, feeding into Pattern Detection.'
+            },
+            'entanglement': {
+                title: 'Entanglement Analysis',
+                description: 'Measures and characterizes quantum entanglement properties across the system.',
+                specs: `
+                    <ul>
+                        <li>Entanglement entropy calculation</li>
+                        <li>Bell inequality violation detection</li>
+                        <li>Entanglement distillation metrics</li>
+                    </ul>
+                `,
+                connections: 'Analyzes data from the Teleportation Module and sends results to the Quantum State Visualizer.'
+            },
+            'bio-correlation': {
+                title: 'Biometric Correlation',
+                description: 'Correlates human physiological states with quantum information patterns.',
+                specs: `
+                    <ul>
+                        <li>Time-series correlation analysis</li>
+                        <li>Group synchronization detection</li>
+                        <li>Anomaly detection in human-quantum interactions</li>
+                    </ul>
+                `,
+                connections: 'Receives data from the Temporal Effects Module and visualizes results in the Correlation Dashboard.'
+            },
+            'pattern': {
+                title: 'Pattern Detection',
+                description: 'Identifies significant patterns in quantum-classical interactions across the system.',
+                specs: `
+                    <ul>
+                        <li>Wavelet analysis for time-frequency correlations</li>
+                        <li>Information flow directionality assessment</li>
+                        <li>Emergent pattern classification</li>
+                    </ul>
+                `,
+                connections: 'Processes data from Quantum Clustering and displays results in the Real-time Monitor.'
+            },
+            'state-viz': {
+                title: 'Quantum State Visualizer',
+                description: 'Provides intuitive representations of quantum states and operations.',
+                specs: `
+                    <ul>
+                        <li>Bloch sphere visualization for qubits</li>
+                        <li>Quantum circuit diagram generation</li>
+                        <li>Entanglement network mapping</li>
+                    </ul>
+                `,
+                connections: 'Displays data from Entanglement Analysis and provides feedback to the Teleportation Module.'
+            },
+            'correlation-dash': {
+                title: 'Correlation Dashboard',
+                description: 'Displays relationships between quantum information and other systems, particularly human biometrics.',
+                specs: `
+                    <ul>
+                        <li>Correlation matrix heatmaps</li>
+                        <li>Time-series alignment views</li>
+                        <li>Statistical significance indicators</li>
+                    </ul>
+                `,
+                connections: 'Visualizes data from Biometric Correlation module for researchers to analyze.'
+            },
+            'monitor': {
+                title: 'Real-time Monitor',
+                description: 'Provides live monitoring of ongoing quantum network operations and experiments.',
+                specs: `
+                    <ul>
+                        <li>System health and performance metrics</li>
+                        <li>Event logging and alerting</li>
+                        <li>Experiment progress tracking</li>
+                    </ul>
+                `,
+                connections: 'Displays data from Pattern Detection and provides feedback to the Quantum Clustering module.'
+            }
+        };
+
+        try {
+            // Create the network visualization
+            const container = document.getElementById('quantum-network');
+            
+            // Configuration for the network graph
+            const options = {
+                nodes: {
+                    shape: 'box',
+                    margin: 10,
+                    shadow: true,
+                    font: {
+                        size: 14,
+                        face: 'Segoe UI',
+                        color: 'white'
                     },
-                    edges: {
-                        width: 2,
+                    borderWidth: 2,
+                    fixed: {
+                        y: true
+                    }
+                },
+                edges: {
+                    width: 2,
+                    shadow: true,
+                    color: {
+                        color: '#ffffff',
+                        highlight: '#aaaaff'
+                    },
+                    smooth: {
+                        type: 'continuous'
+                    }
+                },
+                layout: {
+                    hierarchical: {
+                        direction: 'UD',
+                        levelSeparation: 120,
+                        nodeSpacing: 150,
+                        treeSpacing: 200
+                    }
+                },
+                physics: {
+                    hierarchicalRepulsion: {
+                        centralGravity: 0.0,
+                        springLength: 100,
+                        springConstant: 0.01,
+                        nodeDistance: 160
+                    },
+                    solver: 'hierarchicalRepulsion'
+                },
+                interaction: {
+                    hover: true,
+                    navigationButtons: true,
+                    tooltipDelay: 200
+                },
+                groups: {
+                    physical: {
                         color: {
-                            color: '#ffffff',
-                            highlight: '#aaaaff'
-                        },
-                        smooth: {
-                            type: 'continuous'
+                            background: '#3366cc',
+                            border: '#88aaff',
+                            highlight: {
+                                background: '#4477dd',
+                                border: '#aaccff'
+                            }
                         }
                     },
-                    layout: {
-                        hierarchical: {
-                            direction: 'UD',
-                            sortMethod: 'directed',
-                            levelSeparation: 150
+                    network: {
+                        color: {
+                            background: '#cc6633',
+                            border: '#ffaa88',
+                            highlight: {
+                                background: '#dd7744',
+                                border: '#ffbbaa'
+                            }
                         }
                     },
-                    groups: {
-                        layer1: { color: { background: '#3366cc', border: '#88aaff' } },
-                        layer2: { color: { background: '#cc6633', border: '#ffaa88' } },
-                        layer3: { color: { background: '#33cc66', border: '#88ffaa' } },
-                        layer4: { color: { background: '#9966ff', border: '#bbaaff' } },
-                        layer5: { color: { background: '#ff6699', border: '#ffaacc' } },
-                        
-                        phenomena1: { color: { background: '#66ccff', border: '#aaddff' } },
-                        phenomena2: { color: { background: '#ffcc66', border: '#ffdd88' } },
-                        phenomena3: { color: { background: '#cc66ff', border: '#dd88ff' } }
+                    processing: {
+                        color: {
+                            background: '#33cc66',
+                            border: '#88ffaa',
+                            highlight: {
+                                background: '#44dd77',
+                                border: '#aaffcc'
+                            }
+                        }
+                    },
+                    analysis: {
+                        color: {
+                            background: '#9966ff',
+                            border: '#bbaaff',
+                            highlight: {
+                                background: '#aa77ff',
+                                border: '#ccbbff'
+                            }
+                        }
+                    },
+                    visualization: {
+                        color: {
+                            background: '#ff6699',
+                            border: '#ffaacc',
+                            highlight: {
+                                background: '#ff77aa',
+                                border: '#ffbbdd'
+                            }
+                        }
                     }
-                };
-                
-                debugLog('Creating network');
-                
-                // Initialize the network
-                const network = new vis.Network(container, { nodes, edges }, options);
-                
-                // Add event listener for clicks
-                network.on('click', function(params) {
-                    if (params.nodes.length > 0) {
-                        const nodeId = params.nodes[0];
-                        const node = nodes.get(nodeId);
-                        debugLog('Clicked on node: ' + node.label);
-                    }
-                });
-                
-                debugLog('Visualization successfully initialized');
-            } catch (error) {
-                console.error('Error initializing visualization:', error);
-                debugLog('ERROR: ' + error.message);
-                
-                // Display error in the visualization container
-                const container = document.getElementById('visualization-container');
-                if (container) {
-                    container.innerHTML = `
-                        <div style="padding: 2rem; color: #ff6666;">
-                            <h3>Visualization Error</h3>
-                            <p>${error.message}</p>
-                            <p>Check browser console for more details (F12 key).</p>
-                        </div>
-                    `;
                 }
+            };
+            
+            // Create the network
+            const data = { nodes: nodes, edges: edges };
+            const network = new vis.Network(container, data, options);
+            
+            debugLog('Network visualization created successfully');
+            
+            // Handle node clicks to show details
+            network.on('click', function(params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    const details = nodeDetails[nodeId];
+                    
+                    debugLog(`Node clicked: ${nodeId}`);
+                    
+                    // Update the info panel
+                    document.getElementById('project-overview').style.display = 'none';
+                    document.getElementById('node-details').style.display = 'block';
+                    
+                    document.getElementById('node-title').textContent = details.title;
+                    document.getElementById('node-description').textContent = details.description;
+                    document.getElementById('node-specs').innerHTML = details.specs;
+                    document.getElementById('node-connections').textContent = details.connections;
+                } else {
+                    // Show the project overview when clicking empty space
+                    debugLog('Empty space clicked, showing project overview');
+                    document.getElementById('project-overview').style.display = 'block';
+                    document.getElementById('node-details').style.display = 'none';
+                }
+            });
+            
+            // Log success
+            debugLog('Event handlers set up successfully');
+        } catch (error) {
+            // Log any errors that occur
+            console.error('Error initializing visualization:', error);
+            debugLog(`ERROR: ${error.message}`);
+            
+            // Display error on the page
+            const container = document.getElementById('quantum-network');
+            if (container) {
+                container.innerHTML = `
+                    <div style="padding: 2rem; color: #ff6666; text-align: center;">
+                        <h3>Visualization Error</h3>
+                        <p>${error.message}</p>
+                        <p>Please check the browser console for more details (F12 key).</p>
+                    </div>
+                `;
             }
         }
     </script>
