@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Network Research - About the Project</title>
+    <style>
+        :root {
+            --main-bg-color: #111122;
+            --header-bg-color: #222233;
+            --panel-bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --accent-color: #6666cc;
+            --link-color: #99aaff;
+            --highlight-color: #ff6699;
+            --section-color: rgba(102, 102, 204, 0.2);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--header-bg-color);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: white;
+            border-bottom: 2px solid white;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .readme-section {
+            background-color: var(--panel-bg-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-color);
+        }
+        
+        h1 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+        
+        h2 {
+            margin-top: 2rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: var(--highlight-color);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+            transition: all 0.3s;
+        }
+        
+        a:hover {
+            color: white;
+            border-bottom: 1px solid white;
+        }
+        
+        .highlight-box {
+            background-color: var(--section-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+        
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-card h3 {
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: none;
+        }
+        
+        .social-link:hover {
+            color: white;
+        }
+        
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            fill: currentColor;
+        }
+        
+        footer {
+            background-color: var(--header-bg-color);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            border: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #8888dd;
+            color: white;
+            border-bottom: none;
+        }
+        
+        .timeline {
+            margin: 2rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+        
+        .timeline-item h3 {
+            margin-top: 0;
+        }
+        
+        .reference {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+            
+            .readme-section {
+                padding: 1.5rem;
+            }
+            
+            .contact-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Quantum Network Research</div>
+            <div class="nav-links">
+                <a href="index.html">Overview</a>
+                <a href="architecture.html">Architecture</a>
+                <a href="implementation.html">Implementation</a>
+                <a href="readme.html" class="active">About</a>
+                <a href="https://github.com/diannt/lucid-dream" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="readme-section">
+            <h1>About the Quantum Network Research Project</h1>
+            
+            <p>This open-source research project investigates quantum phenomena in networked systems, building on recent breakthroughs in quantum teleportation over conventional internet infrastructure. As we stand at the threshold of a new era in computing and communications, understanding these quantum effects becomes increasingly crucial for future technological development.</p>
+            
+            <div class="highlight-box">
+                <h3>Project Vision</h3>
+                <p>To create a comprehensive framework for investigating, visualizing, and implementing quantum network technologies that will form the foundation of next-generation secure communications, distributed quantum computing, and quantum internet infrastructure.</p>
+            </div>
+            
+            <h2>Why This Research Matters</h2>
+            
+            <p>The field of quantum networking represents one of the most promising frontiers in information technology, with potential to revolutionize how we process, transmit, and secure data across global networks. Our project specifically focuses on three key quantum phenomena that will be essential to future quantum internet infrastructure:</p>
+            
+            <h3>Quantum Teleportation</h3>
+            <p>In December 2024, Northwestern University engineers successfully demonstrated quantum teleportation over conventional fiber optic cables carrying regular internet traffic. This groundbreaking achievement showed that quantum and classical communications can coexist on the same physical infrastructure, eliminating the need for separate, specialized quantum networks.</p>
+            <p>Our project builds upon this foundation, developing software frameworks that model, analyze, and visualize quantum teleportation in practical networked environments. By understanding how quantum states can be reliably transferred between spatially separated systems, we take a crucial step toward scalable quantum communication.</p>
+            
+            <h3>Temporal Information Effects</h3>
+            <p>Quantum systems exhibit fascinating temporal behaviors that defy classical intuition. When quantum information traverses a network, measurement outcomes can appear correlated across time in ways that suggest retrocausal effects. Our project investigates these temporal anomalies and their potential applications in network timing protocols, distributed quantum sensing, and quantum-enhanced prediction systems.</p>
+            
+            <h3>Information Clustering</h3>
+            <p>As quantum networks scale up, coherent information structures emerge that behave as collective entities across network nodes. Understanding these clustering phenomena is crucial for developing robust quantum routing protocols, error correction systems, and distributed quantum computing architectures. Our research provides visualization and analysis tools for studying these complex quantum information structures.</p>
+            
+            <h2>Long-Term Benefits &amp; Applications</h2>
+            
+            <p>Investing in quantum network research today lays the groundwork for numerous transformative technologies that will reshape our digital infrastructure in the coming decades. The potential applications span multiple fields:</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Near-term (1-3 years)</h3>
+                    <p>Development of quantum-enhanced encryption protocols that can be implemented on existing infrastructure. Creation of simulation tools for quantum network design and optimization. Proof-of-concept demonstrations of quantum state transfer across conventional networks.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Medium-term (3-7 years)</h3>
+                    <p>Deployment of quantum-secure communication channels for critical infrastructure. Implementation of distributed quantum sensing networks for environmental monitoring and medical diagnostics. Development of hybrid quantum-classical computing frameworks that leverage both paradigms.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Long-term (7+ years)</h3>
+                    <p>Global quantum internet infrastructure connecting quantum computers across continents. Quantum-enhanced artificial intelligence systems that leverage entangled networks for unprecedented computational capabilities. New scientific insights derived from quantum network experiments that probe the fundamental nature of information, causality, and reality itself.</p>
+                </div>
+            </div>
+            
+            <h2>Resource Justification</h2>
+            
+            <p>Continued investment in quantum network research offers exceptional long-term value for several key reasons:</p>
+            
+            <div class="highlight-box">
+                <h3>Strategic Technology Leadership</h3>
+                <p>Nations and organizations at the forefront of quantum networking will gain significant advantages in cybersecurity, communications infrastructure, and computational capabilities. Early investment in fundamental research ensures leadership in the quantum technologies that will define the mid-21st century economy.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Infrastructure Readiness</h3>
+                <p>By developing quantum network technologies compatible with existing infrastructure, we create a smoother transition path to quantum-enhanced systems. This approach maximizes return on current telecommunications investments while preparing for quantum capabilities.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Cross-disciplinary Innovation</h3>
+                <p>Quantum network research sits at the intersection of physics, computer science, information theory, and engineering. Breakthroughs in this field frequently generate unexpected innovations across multiple domains, creating a multiplier effect for research investment.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Open Science Acceleration</h3>
+                <p>Our open-source approach ensures that advances in quantum networking become widely accessible, accelerating global innovation and fostering a collaborative ecosystem. This leads to faster development cycles and broader implementation of quantum technologies.</p>
+            </div>
+            
+            <h2>Current Research Status</h2>
+            
+            <p>Our project has developed a comprehensive five-layer architecture for quantum network research:</p>
+            
+            <ol>
+                <li><strong>Physical Infrastructure Layer:</strong> Models the physical components needed for quantum-classical communications</li>
+                <li><strong>Quantum-Classical Network Layer:</strong> Manages transmission of both quantum and classical information</li>
+                <li><strong>Quantum Information Processing Layer:</strong> Implements core quantum protocols and processing</li>
+                <li><strong>Analysis and Correlation Layer:</strong> Provides tools for analyzing quantum phenomena</li>
+                <li><strong>Visualization and Interface Layer:</strong> Creates intuitive representations of complex quantum concepts</li>
+            </ol>
+            
+            <p>We have implemented visualization tools for these components and are actively developing simulation frameworks that model quantum network behaviors under various conditions. The project welcomes contributions from researchers, developers, and enthusiasts interested in advancing quantum networking technology.</p>
+            
+            <h2>Get Involved</h2>
+            
+            <p>This open-source project welcomes contributions from individuals and organizations interested in quantum networking research. Ways to participate include:</p>
+            
+            <ul>
+                <li>Improving visualizations and simulation accuracy</li>
+                <li>Implementing additional quantum protocols</li>
+                <li>Enhancing documentation and educational materials</li>
+                <li>Testing and validating models against experimental results</li>
+                <li>Proposing new research directions and applications</li>
+            </ul>
+            
+            <a href="https://github.com/diannt/lucid-dream" class="btn" target="_blank">Contribute on GitHub</a>
+        </div>
+        
+        <div class="readme-section">
+            <h2>Contact Information</h2>
+            
+            <p>For inquiries about this research project, collaboration opportunities, or technical questions, please reach out to the project lead:</p>
+            
+            <div class="contact-section">
+                <div class="contact-card">
+                    <h3>Nikita</h3>
+                    <p>Project Lead &amp; Principal Researcher</p>
+                    
+                    <a href="https://www.linkedin.com/in/nikita-annt/" class="social-link" target="_blank">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn: nikita-annt
+                    </a>
+                    
+                    <a href="https://github.com/diannt" class="social-link" target="_blank">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub: diannt
+                    </a>
+                    
+                    <p>For technical inquiries and collaboration opportunities related to quantum networking research.</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Project Resources</h3>
+                    
+                    <p><strong>GitHub Repository:</strong><br>
+                    <a href="https://github.com/diannt/lucid-dream" target="_blank">github.com/diannt/lucid-dream</a></p>
+                    
+                    <p><strong>Project Website:</strong><br>
+                    <a href="https://diannt.net/" target="_blank">diannt.net</a></p>
+                    
+                    <p><strong>Documentation:</strong><br>
+                    Available in the GitHub repository</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="readme-section">
+            <h2>Acknowledgments</h2>
+            
+            <p>This project builds upon the groundbreaking work of researchers in quantum physics, network engineering, and information theory. Special acknowledgment to the Northwestern University team whose 2024 demonstration of quantum teleportation over conventional internet infrastructure serves as a foundational inspiration for this work.</p>
+            
+            <p>We also extend our gratitude to the open-source community whose collective efforts continue to make advanced quantum concepts more accessible through visualization, simulation, and educational resources.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Quantum Network Research Project | Open Source | 2025</p>
+    </footer>
+</body>
+</html>
