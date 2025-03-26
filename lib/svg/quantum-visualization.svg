@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#111122"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" fill="#ffffff" text-anchor="middle">Quantum Phenomena Visualization</text>
+  
+  <!-- Left Cube (Source) -->
+  <g id="left-cube">
+    <path d="M100,300 L200,250 L200,400 L100,450 Z" fill="#3366cc" fill-opacity="0.7" stroke="#88aaff" stroke-width="2"/>
+    <path d="M200,250 L300,300 L300,450 L200,400 Z" fill="#2255bb" fill-opacity="0.7" stroke="#88aaff" stroke-width="2"/>
+    <path d="M100,300 L200,250 L300,300 L200,350 Z" fill="#4477dd" fill-opacity="0.7" stroke="#88aaff" stroke-width="2"/>
+    <text x="200" y="350" font-family="Arial" font-size="18" fill="#ffffff" text-anchor="middle">Source</text>
+    
+    <!-- Qubit states in left cube -->
+    <circle cx="150" cy="320" r="15" fill="#ff3333" stroke="#ffffff" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <text x="150" y="325" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">|0⟩</text>
+    
+    <circle cx="250" cy="340" r="15" fill="#33ff33" stroke="#ffffff" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="250" y="345" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">|1⟩</text>
+  </g>
+  
+  <!-- Right Cube (Target) -->
+  <g id="right-cube">
+    <path d="M500,300 L600,250 L600,400 L500,450 Z" fill="#cc6633" fill-opacity="0.7" stroke="#ffaa88" stroke-width="2"/>
+    <path d="M600,250 L700,300 L700,450 L600,400 Z" fill="#bb5522" fill-opacity="0.7" stroke="#ffaa88" stroke-width="2"/>
+    <path d="M500,300 L600,250 L700,300 L600,350 Z" fill="#dd7744" fill-opacity="0.7" stroke="#ffaa88" stroke-width="2"/>
+    <text x="600" y="350" font-family="Arial" font-size="18" fill="#ffffff" text-anchor="middle">Target</text>
+    
+    <!-- Qubit states in right cube -->
+    <circle cx="550" cy="320" r="15" fill="#ff3333" stroke="#ffffff" stroke-width="1.5" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    <text x="550" y="325" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="2s"/>
+      |0⟩
+    </text>
+    
+    <circle cx="650" cy="340" r="15" fill="#33ff33" stroke="#ffffff" stroke-width="1.5" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite" begin="2.5s"/>
+    </circle>
+    <text x="650" y="345" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite" begin="2.5s"/>
+      |1⟩
+    </text>
+  </g>
+  
+  <!-- Quantum Gas Representation Between Cubes -->
+  <g id="quantum-gas">
+    <path d="M300,350 C350,320 450,320 500,350" stroke="#9966ff" stroke-width="4" fill="none" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" values="0;100" dur="10s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Entangled Particles -->
+    <g>
+      <circle cx="350" cy="335" r="7" fill="#ffff44">
+        <animate attributeName="cx" values="350;450" dur="8s" repeatCount="indefinite" begin="0s"/>
+        <animate attributeName="cy" values="335;335" dur="8s" repeatCount="indefinite" begin="0s"/>
+        <animate attributeName="r" values="7;7;10;7" dur="8s" repeatCount="indefinite" begin="0s"/>
+      </circle>
+      <circle cx="450" cy="335" r="7" fill="#ffff44">
+        <animate attributeName="cx" values="450;350" dur="8s" repeatCount="indefinite" begin="0s"/>
+        <animate attributeName="cy" values="335;335" dur="8s" repeatCount="indefinite" begin="0s"/>
+        <animate attributeName="r" values="7;7;10;7" dur="8s" repeatCount="indefinite" begin="0s"/>
+      </circle>
+    </g>
+    
+    <!-- Additional Particles in Gas -->
+    <g id="gas-particles">
+      <circle cx="370" cy="350" r="3" fill="#aaaaff" opacity="0.7">
+        <animate attributeName="cy" values="350;330;350" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="390" cy="340" r="3" fill="#aaaaff" opacity="0.7">
+        <animate attributeName="cy" values="340;360;340" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="410" cy="345" r="3" fill="#aaaaff" opacity="0.7">
+        <animate attributeName="cy" values="345;325;345" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="430" cy="335" r="3" fill="#aaaaff" opacity="0.7">
+        <animate attributeName="cy" values="335;355;335" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <text x="400" y="310" font-family="Arial" font-size="16" fill="#aaaaff" text-anchor="middle">Quantum Entanglement</text>
+  </g>
+  
+  <!-- Information Transfer Paths -->
+  <g id="information-paths">
+    <!-- Teleportation Path -->
+    <path d="M200,350 Q400,150 600,350" stroke="#ff6699" stroke-width="3" fill="none" stroke-dasharray="10,10" opacity="0.7">
+      <animate attributeName="stroke-dashoffset" values="0;100" dur="7s" repeatCount="indefinite"/>
+    </path>
+    <text x="400" y="180" font-family="Arial" font-size="14" fill="#ff6699" text-anchor="middle">Teleportation</text>
+    
+    <!-- Retrocausal Path (Past Information) -->
+    <path d="M600,350 Q400,500 200,350" stroke="#66ccff" stroke-width="3" fill="none" stroke-dasharray="10,10" opacity="0.7">
+      <animate attributeName="stroke-dashoffset" values="0;-100" dur="9s" repeatCount="indefinite"/>
+    </path>
+    <text x="400" y="480" font-family="Arial" font-size="14" fill="#66ccff" text-anchor="middle">Information Transfer Into Past</text>
+    
+    <!-- Inertion/Clustering -->
+    <g id="clustering">
+      <ellipse cx="400" cy="350" rx="70" ry="40" stroke="#ffaa33" stroke-width="2" fill="none" opacity="0.5">
+        <animate attributeName="rx" values="70;80;70" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="ry" values="40;45;40" dur="12s" repeatCount="indefinite"/>
+      </ellipse>
+      <text x="400" y="350" font-family="Arial" font-size="14" fill="#ffaa33" text-anchor="middle">Inertion Field</text>
+    </g>
+  </g>
+  
+  <!-- Computer State Readout -->
+  <g id="quantum-computer">
+    <rect x="325" y="500" width="150" height="70" rx="5" fill="#333355" stroke="#8888aa" stroke-width="2"/>
+    <text x="400" y="520" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Quantum State</text>
+    
+    <!-- Qubit State Representations -->
+    <g id="qubit-readouts">
+      <text x="350" y="545" font-family="Courier New" font-size="14" fill="#33ff33" text-anchor="middle">|ψ⟩=α|00⟩+β|11⟩</text>
+      <text x="400" y="565" font-family="Courier New" font-size="12" fill="#ffcc44" text-anchor="middle">Superposition Field</text>
+    </g>
+  </g>
+  
+  <!-- Legend -->
+  <g id="legend" transform="translate(20,20)">
+    <rect x="0" y="0" width="180" height="120" fill="#222233" opacity="0.7" rx="5"/>
+    <text x="10" y="20" font-family="Arial" font-size="14" fill="#ffffff">Legend:</text>
+    
+    <circle cx="20" cy="40" r="6" fill="#ff3333"/>
+    <text x="35" y="45" font-family="Arial" font-size="12" fill="#ffffff">Qubit |0⟩</text>
+    
+    <circle cx="20" cy="65" r="6" fill="#33ff33"/>
+    <text x="35" y="70" font-family="Arial" font-size="12" fill="#ffffff">Qubit |1⟩</text>
+    
+    <circle cx="20" cy="90" r="6" fill="#ffff44"/>
+    <text x="35" y="95" font-family="Arial" font-size="12" fill="#ffffff">Entangled Pair</text>
+    
+    <line x1="20" y1="115" x2="50" y2="115" stroke="#aaaaff" stroke-width="2"/>
+    <text x="60" y="120" font-family="Arial" font-size="12" fill="#ffffff">Quantum Medium</text>
+  </g>
+</svg>

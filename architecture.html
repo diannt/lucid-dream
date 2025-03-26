@@ -154,18 +154,37 @@
             margin-left: 30px;
         }
         
-        .architecture-diagram {
+        .architecture-figure {
             width: 100%;
-            max-width: 800px;
-            height: 400px;
+            max-width: 1200px;
             margin: 2rem auto;
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: var(--panel-bg-color);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .figure-content {
+            padding: 1.5rem;
+        }
+
+        .architecture-svg {
+            width: 100%;
+            min-height: 600px;
+            display: block;
+        }
+
+        .figure-caption {
+            padding: 1rem 1.5rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-style: italic;
-            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .figure-number {
+            font-weight: bold;
+            font-style: normal;
         }
     </style>
 </head>
@@ -183,16 +202,47 @@
     </header>
     
     <main>
-        <div class="content-section">
+
+        <section class="content-section">
             <h1>System Architecture</h1>
             <p>
-                The Quantum Network Research project is built on a five-layer architecture designed to systematically investigate quantum phenomena in networked systems. This architecture provides a comprehensive framework for exploring quantum teleportation, temporal effects, and information clustering across conventional internet infrastructure.
+                The Quantum Network Research project is built on a five-layer architecture designed to systematically 
+                investigate quantum phenomena in networked systems. This architecture provides a comprehensive framework 
+                for exploring quantum teleportation, temporal effects, and information clustering.
+            </p>
+
+            <div class="architecture-figure">
+                <div class="figure-content">
+                    <!-- Your existing SVG/object tag here -->
+                    <object type="image/svg+xml" data="lib/svg/quantum-software-architecture.svg" class="architecture-svg">
+                        Your browser does not support SVG
+                    </object>
+                </div>
+                
+                <figcaption class="figure-caption">
+                    <span class="figure-number">Figure 1:</span> The five layers of our quantum network architecture, showing how components interact across physical infrastructure, network, processing, analysis, and visualization layers.
+                </figcaption>
+            </div>
+             
+        </section>
+
+        
+        <section class="content-section">
+            <h2>Quantum Phenomena Visualization</h2>
+            <p>
+                Our visualization approach helps conceptualize the complex quantum phenomena being studied.
             </p>
             
-            <div class="architecture-diagram">
-                [Layered Architecture Diagram - Visualized in the interactive graph on the home page]
+            <div class="visualization-diagram">
+                <img src="lib/svg/quantum-visualization.svg" alt="Quantum Phenomena Visualization" class="svg-content">
+                <p class="diagram-caption">
+                    Figure 2: Visual representation of quantum teleportation, temporal effects, and information clustering phenomena.
+                </p>
             </div>
-            
+        </section>
+
+
+        <div class="content-section">            
             <p>
                 Each layer of our system architecture is designed with specific responsibilities and interfaces with adjacent layers to create a complete quantum networking stack. Below, we detail each layer and its components.
             </p>
